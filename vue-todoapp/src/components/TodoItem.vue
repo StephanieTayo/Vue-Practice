@@ -9,17 +9,24 @@ todo:{
    
 },
 
-});
+index:{
+type: Number,
+required: true,
+},
+
+}); 
+defineEmits(["toggle-complete", "edit-todo", "update-todo","delete-todo"]);
+
 </script>
 
 <template>
     
         <li>
-            <input type="checkbox" :checked="todo.isCompleted">
+            <input type="checkbox" :checked="todo.isCompleted" @input="$emit('toggle-complete',index)">
 
             <div class="todo">
-                <input  v-if="todo.isEditing" type="text"   :value="todo.todo">
-                <span v-else> {{ todo.todo }}</span>
+                <input  v-if="todo.isEditing" type="text"   :value="todo.todo" @input="$emit('update-todo', $event.target.value, index)">
+                <span v-else :class="{'completed-todo' : todo.isCompleted}" > {{ todo.todo }}</span>
                 
             </div> 
 
@@ -30,6 +37,7 @@ todo:{
         class="icon check-icon"
         color="41b080"
         width="22"
+        @click="$emit('edit-todo', index)"
       />
       <Icon
         v-else
@@ -37,8 +45,9 @@ todo:{
         class="icon edit-icon"
         color="41b080"
         width="22"
+        @click="$emit('edit-todo', index)"
       />
-      <Icon icon="ph:trash" class="icon trash-icon" color="f95e5e" width="22" />
+      <Icon icon="ph:trash" class="icon trash-icon" color="f95e5e" width="22" @click="$emit('delete-todo', index)" />
             </div>
         </li>
     
@@ -76,6 +85,10 @@ li {
 
   .todo {
     flex: 1;
+
+    .completed-todo{
+      text-decoration: line-through;
+    }
 
     input[type="text"] {
       width: 100%;

@@ -30,7 +30,7 @@ const createTodo = () => {
 <template>
     <div class="input-wrap"  :class= " { 'input-err' : todoState.invalid}">
         <input type="text" v-model="todoState.todo"/>
-       <TodoButton @click="createTodo()">Addd </TodoButton>
+       <TodoButton @click="createTodo()"> +Add </TodoButton>
    
     </div>
 
