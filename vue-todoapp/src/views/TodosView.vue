@@ -1,7 +1,7 @@
 <script setup>
 
 
-import {ref} from "vue";
+import {ref, computed} from "vue";
 import { uid } from "uid";
 import TodoCreator from "../components/TodoCreator.vue";
 import TodoItem from "../components/TodoItem.vue";
@@ -9,6 +9,9 @@ import { Icon } from "@iconify/vue";
 
 const todoList= ref([]);
 
+const todoCompleted = computed(() => {
+  return todoList.value.every((todo)=>todo.isCompleted); 
+}); 
 
 
 const createTodo = (todo) => {
@@ -52,7 +55,9 @@ const deleteTodo=(todoPos) =>{
       <Icon icon="noto-v1:sad-but-relieved-face" />
       <span>You have no todo's to complete! Add one!</span>
     </p>
-
+<p v-if="todoCompleted && todoList.length > 0" class="todos-msg"> 
+  <Icon icon="noto-v1:party-popper" />
+  <span>You have completed all your Tasks!</span></p>
   </main>
 </template>
 <style lang="scss">
