@@ -6,8 +6,10 @@
  const emit = defineEmits(["object-fetched"]);
 
  import TodoButton from "./TodoButton.vue"; 
+ import ErrorMsg from "./ErrorMsg.vue";
 
  const searchId =ref(''); 
+ const errorMessage = ref('');
 
  const fetchObject = async () => {
   try {
@@ -18,10 +20,13 @@
     // Log the response
     console.log(response.data);
     console.log( response.data.name);
+    errorMessage.value = '';
     // Handle the response data here, you can update your UI accordingly
   } catch (error) {
+    
     // Handle any errors
     console.error('Error fetching object:', error);
+    errorMessage.value = 'An error occurred while fetching object data.';
   }
 };
 
@@ -34,6 +39,9 @@
       <input type="text" v-model="searchId" placeholder="Enter object ID">
       <TodoButton @click="fetchObject">Search</TodoButton>
       </div>
+      <div v-if="errorMessage" class="error-template">
+      <ErrorMsg/>
+    </div>
     </div>
   </template>
  
@@ -67,9 +75,13 @@
     }
   }
 
-  
-
 }
-  
+
+.error-template {
+  margin-top: 10px;
+  color: red;
+  font-weight: bold;
+}
+
   </style>
   

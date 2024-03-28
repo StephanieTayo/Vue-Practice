@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from 'vue';
+import { defineProps } from 'vue';
 
 //const object = ref(null);
 // Define prop for receiving object data from parent component
