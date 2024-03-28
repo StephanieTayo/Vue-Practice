@@ -12,8 +12,8 @@ import { RouterLink } from 'vue-router';
                     <h1> Practice App</h1>
                 </div>
                 <ul class="nav-routes"> 
-                    <RouterLink to="/">  Home</RouterLink>
-                    <RouterLink to="/about">  About</RouterLink>
+                    <RouterLink to="/">  ToDo </RouterLink>
+                    <RouterLink to="/about"> Test-Objects</RouterLink>
                 </ul>
             </nav>
         </header>
